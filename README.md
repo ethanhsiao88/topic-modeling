@@ -1,41 +1,30 @@
 # NLP Self Service Comment Classifier (Topic Modeling)
 
-## Description: The ML model categorizes negative NPS comments based on customers' complaints 
-
+## Description: 
+- The ML model categorizes negative NPS comments based on customers' complaints 
 - NLP self service comment classifier model: predicts comment classes with around 90% accuracy <br />
 
-
-
-
-## Significance: This model can be used by the business to better understand customer feedback and comprehend trends in user sentiments (ex. shipping complaints skyrocketed from Feb-Apr) 
-
+## Significance: 
+- This model can be used by the business to better understand customer feedback and comprehend trends in user sentiments (ex. shipping complaints skyrocketed from Feb-Apr) 
 - Automating the comment labeling process saves the business time, money, and effort. Now, no human has to read through thousands of comments anymore to comprehend what can be improved
-
 - This model helps the business determine where to invest in order to improve customer experience, driving a more effective business strategy and potentially bringing in millions in extra revenue
-
-- It would help the business invest in areas that need the greatest improvement, whether it be variety, shipping, personalization, or excitement/quality of products
-
+- It would help the business invest in areas that need the greatest improvement, whether it be variety, shipping, personalization, or excitement/quality of products <br />
 
 
-
-Model: Our model uses BERT (Bidirectional Encoder Representations for Transformers) 
-
+## Model: 
+- Our model uses BERT (Bidirectional Encoder Representations for Transformers) 
 - BERT was pretrained on BookCorpus: Wikipedia sites (2500M words) & over 11k books (800M words) 
-
 - An extremely powerful algorithm developed by Google in 2018 - able to understand context and enable transfer learning from large corpuses to any NLP task, including topic modeling
-
-- We're using comment embeddings from a pretrained BERT model (bert-base-uncased). We're tokenizing the comments - they're overlaid on the embeddings already created in pretrained model
-
+- We're using comment embeddings from a pretrained BERT model (bert-base-uncased). We're tokenizing the comments - they're overlaid on the embeddings already created in pretrained model <br />
 
 
+## How to Train the Model:
 
-How to Train the Model:
+1. To train this model, a user must input the URL link to a training dataset in S3
 
-- To train this model, a user must input the URL link to a training dataset in S3
+   - Training dataset must be in csv format
 
- - Training dataset must be in csv format
-
- - Training dataset must contain the following columns (syntax must be identical):
+   - Training dataset must contain the following columns (syntax must be identical):
 
 Start Date
 
