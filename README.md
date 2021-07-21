@@ -1,30 +1,112 @@
-# NLP Self Service Comment Classifier (Topic Modeling)
+## NLP Self Service Comment Classifier (Topic Modeling)
 
-Description: This ML model uses AI on negative NPS comments to categorize the complaints customers have with IPSY. 
+Description: The ML model categorizes negative NPS comments based on customers' complaints
 
 NLP self service comment classifier model: predicts comment classes with around 90% accuracy
 
-Significance: This model can be used by the business to better understand customer feedback and comprehend trends in user sentiments (ex. shipping complaints skyrocketed from Feb-Apr). 
+ 
 
-Automating the comment labeling process saves the business time, money, and effort, as nobody would have to read through thousands of comments anymore to comprehend what customers are unsatisfied with. 
+Significance: This model can be used by the business to better understand customer feedback and comprehend trends in user sentiments (ex. shipping complaints skyrocketed from Feb-Apr) 
 
-This model could also help the business determine where to invest in order to improve customer experience, driving a more effective business strategy and potentially avoiding millions in losses and bringing in millions in extra revenue. It would help the business invest in areas that need the greatest improvement, whether it be shipping, personalization, excitement/quality of products, or ensuring that customers receive a variety of products.
+- Automating the comment labeling process saves the business time, money, and effort. Now, no human has to read through thousands of comments anymore to comprehend what can be improved
 
-Model: Our model uses BERT - Bidirectional Encoder Representations for Transformers (bert-base-uncased) - which is an extremely powerful algorithm developed by Google in 2018. 
+- This model helps the business determine where to invest in order to improve customer experience, driving a more effective business strategy and potentially bringing in millions in extra revenue
 
-BERT was pretrained on BookCorpus - Wikipedia sites (2500M words) and over 11k books (800M words) 
+- It would help the business invest in areas that need the greatest improvement, whether it be variety, shipping, personalization, or excitement/quality of products
 
-It is able to understand context and enable transfer learning from large corpuses to any NLP task, including topic modeling.
+ 
 
-We are using comment embeddings from this pretrained BERT model (bert-base-uncased). We are tokenizing the comments - they are overlaid on the embeddings that were already created in the pretrained model.
+Model: Our model uses BERT (Bidirectional Encoder Representations for Transformers) 
+
+- BERT was pretrained on BookCorpus: Wikipedia sites (2500M words) & over 11k books (800M words) 
+
+- An extremely powerful algorithm developed by Google in 2018 - able to understand context and enable transfer learning from large corpuses to any NLP task, including topic modeling
+
+- We're using comment embeddings from a pretrained BERT model (bert-base-uncased). We're tokenizing the comments - they're overlaid on the embeddings already created in pretrained model
+
+
 
 How to Train the Model:
 
-To use this model, a user would input the URL link to a csv file in S3, as well as the desired test/train split, number of train epochs, and the path they want to save the model to. The training dataset (csv file) would contain the comments, their respective NPS scores, their labels (personalization, shipping/packaging, repetitive, excitement/quality, value/price, other), as well as other fields. The model will then train on this data and display the results. Once the model is trained, the user would be able to input any csv dataset, and the pretrained model will categorize all of the data for the user and return the results.
+To train this model, a user must input the URL link to a training dataset in S3
 
-How to Use Pretrained Model to Predict Classes:
+Training dataset must be in csv format
 
-To use this model, a user would input the URL link to a csv file in S3, as well as the desired test/train split, number of train epochs, and t
+Training dataset must contain the following columns (syntax must be identical):
+
+Start Date
+
+End Date
+
+How likely are you to recommend the Glam Bag to a friend?
+
+What is the most important reason for your recommendation answer?
+
+topic_type
+
+Recommended labels: personalization, shipping/packaging, repetitive, excitement/quality, value/price, other (syntax should be identical)
+
+userId
+
+NOTE: Since this is a csv, it is parsed by commas. To avoid errors, replace all commas with spaces
+
+The user can also adjust 3 other fields:
+
+Desired test/train split (default = 0.2; can change to 0.1, 0.15, 0.25, or 0.3)
+
+Number of train epochs (default = 15; can change to 5, 10, or 20)
+
+Path they want to save the model to (default = dbfs:/mnt/ipsy-databricks-mlp/research/ethan/monolabeled-model-full-w-others-copy)
+
+Click “Run All” and watch the model train! 
+
+Evaluation of the model will also be displayed. Metrics include the model’s accuracy, weighted f1 score, f1 scores for each label, as well as confusion matrices and normalized confusion matrices
+
+Results from model trained on over 10,000 detractors from Feb-Jun for GB, GB+, and GBX:
+
+
+
+
+ 
+
+ 
+
+How to Use Pretrained Model for Inference (to Predict Classes):
+
+To use this model for inference, a user must input the URL link to a dataset in S3
+
+Dataset must be in csv format
+
+Dataset must contain the following columns (syntax must be identical):
+
+Start Date
+
+End Date
+
+How likely are you to recommend the Glam Bag to a friend?
+
+What is the most important reason for your recommendation answer?
+
+userId
+
+NOTE: Since this is a csv, it is parsed by commas. To avoid errors, replace all commas with spaces
+
+The user should also input the path to the saved, pretrained model that will be used for inference
+
+Default = dbfs:/mnt/ipsy-databricks-mlp/research/ethan/monolabeled-model-business-w-flair-and-other
+
+Click “Run All” and watch the inference occur! 
+
+Evaluate results! Numerous bar graphs grouped by NPS, topic type, subscription, & month are displayed and help visualize trends
+
+Some results from over 10,000 detractors from Feb-Jun for GB, GB+, and GBX:
+
+
+
+
+
+
+
 
 Code:
 
@@ -32,41 +114,46 @@ Notebook for training model: https://ipsy-prod.cloud.databricks.com/#notebook/46
 
 Notebook for inference using pretrained model: https://ipsy-prod.cloud.databricks.com/#notebook/4676157/command/4676247
 
+Github: https://github.com/ethanhsiao88/topic-modeling/blob/main/inference_using_model.ipynb - Connect to preview 
+
+ 
+
 Training Pipeline:
 
-For training the model, these are the steps outlined in the notebook:
+For training the model, these are the steps for the code outlined in the notebook:
 
-Step 1: Read labeled data (from user-inputed S3 URL link)
+Read labeled data (from user-inputed S3 URL link)
 
-Step 2: Preprocessing (data validation, filtering only important information, adding columns)
+Preprocessing (data validation, filtering only important information, adding columns)
 
-Step 3: Flair (filtering out only negative comments)
+Flair (filtering out only negative comments)
 
-Step 4: Train Model
+Train Model
 
-Step 5: Save Model
+Save Model
 
-Step 6: Evaluate Model
+Evaluate Model (accuracy, f1 scores, weighted f1 score, confusion matrices)
+
+ 
 
 Inference Pipeline: 
 
-For inference using a pretrained model, these are the steps outlined in the notebook:
+For inference using a pretrained model, these are the steps for the code outlined in the notebook:
 
-Step 1: Read unlabeled data (from user-inputed S3 URL link)
+Read unlabeled data (from user-inputed S3 URL link)
 
-Step 2: Preprocessing (data validation, filtering only important information, adding columns)
+Preprocessing (data validation, filtering only important information, adding columns)
 
-Step 3: Flair (filtering out only negative comments)
+Flair (filtering out only negative comments)
 
-Step 4: Prediction using pretrained model (link to model user-inputed)
+Prediction using pretrained model (link to model user-inputed)
 
-Step 5: Evaluate Results (accuracy, f1 scores), Visualize Findings (confusion matrices)
+Evaluate Results (bar graphs grouped by NPS, topic type, subscription, & month help visualize trends)
 
-Email to Lori, Barbara, Sundi, James, Adina, Paula
+ 
 
-Send tom morning
+Credits:
 
-replace commas
+Model built by Ethan Hsiao (ML intern) and Jyotirmoy Sundi, assisted by entire ML team
 
-Model built by Ethan Hsiao (ML intern) and Jyotirmoy Sundi.
-
+Emails: ethanhsiao@bfaindustries.com, sundi@bfaindustries.com
