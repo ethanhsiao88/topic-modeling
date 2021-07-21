@@ -2,9 +2,10 @@
 
 Description: The ML model categorizes negative NPS comments based on customers' complaints
 
-NLP self service comment classifier model: predicts comment classes with around 90% accuracy
+- NLP self service comment classifier model: predicts comment classes with around 90% accuracy
 
- 
+
+
 
 Significance: This model can be used by the business to better understand customer feedback and comprehend trends in user sentiments (ex. shipping complaints skyrocketed from Feb-Apr) 
 
@@ -14,7 +15,8 @@ Significance: This model can be used by the business to better understand custom
 
 - It would help the business invest in areas that need the greatest improvement, whether it be variety, shipping, personalization, or excitement/quality of products
 
- 
+
+
 
 Model: Our model uses BERT (Bidirectional Encoder Representations for Transformers) 
 
@@ -26,13 +28,14 @@ Model: Our model uses BERT (Bidirectional Encoder Representations for Transforme
 
 
 
+
 How to Train the Model:
 
-To train this model, a user must input the URL link to a training dataset in S3
+- To train this model, a user must input the URL link to a training dataset in S3
 
-Training dataset must be in csv format
+ - Training dataset must be in csv format
 
-Training dataset must contain the following columns (syntax must be identical):
+ - Training dataset must contain the following columns (syntax must be identical):
 
 Start Date
 
@@ -110,50 +113,53 @@ Some results from over 10,000 detractors from Feb-Jun for GB, GB+, and GBX:
 
 Code:
 
-Notebook for training model: https://ipsy-prod.cloud.databricks.com/#notebook/4659645/command/4659655
+- Notebook for training model: https://ipsy-prod.cloud.databricks.com/#notebook/4659645/command/4659655
 
-Notebook for inference using pretrained model: https://ipsy-prod.cloud.databricks.com/#notebook/4676157/command/4676247
+- Notebook for inference using pretrained model: https://ipsy-prod.cloud.databricks.com/#notebook/4676157/command/4676247
 
-Github: https://github.com/ethanhsiao88/topic-modeling/blob/main/inference_using_model.ipynb - Connect to preview 
+- Github: https://github.com/ethanhsiao88/topic-modeling/blob/main/inference_using_model.ipynb - Connect to preview 
 
  
+
 
 Training Pipeline:
 
 For training the model, these are the steps for the code outlined in the notebook:
 
-Read labeled data (from user-inputed S3 URL link)
+1. Read labeled data (from user-inputed S3 URL link)
 
-Preprocessing (data validation, filtering only important information, adding columns)
+2. Preprocessing (data validation, filtering only important information, adding columns)
 
-Flair (filtering out only negative comments)
+3. Flair (filtering out only negative comments)
 
-Train Model
+4. Train Model
 
-Save Model
+5. Save Model
 
-Evaluate Model (accuracy, f1 scores, weighted f1 score, confusion matrices)
+6. Evaluate Model (accuracy, f1 scores, weighted f1 score, confusion matrices)
 
- 
+
+
 
 Inference Pipeline: 
 
 For inference using a pretrained model, these are the steps for the code outlined in the notebook:
 
-Read unlabeled data (from user-inputed S3 URL link)
+1. Read unlabeled data (from user-inputed S3 URL link)
 
-Preprocessing (data validation, filtering only important information, adding columns)
+2. Preprocessing (data validation, filtering only important information, adding columns)
 
-Flair (filtering out only negative comments)
+3. Flair (filtering out only negative comments)
 
-Prediction using pretrained model (link to model user-inputed)
+4. Prediction using pretrained model (link to model user-inputed)
 
-Evaluate Results (bar graphs grouped by NPS, topic type, subscription, & month help visualize trends)
+5. Evaluate Results (bar graphs grouped by NPS, topic type, subscription, & month help visualize trends)
 
  
 
+
 Credits:
 
-Model built by Ethan Hsiao (ML intern) and Jyotirmoy Sundi, assisted by entire ML team
+- Model built by Ethan Hsiao (ML intern) and Jyotirmoy Sundi, assisted by entire ML team
 
-Emails: ethanhsiao@bfaindustries.com, sundi@bfaindustries.com
+- Emails: ethanhsiao@bfaindustries.com, sundi@bfaindustries.com
