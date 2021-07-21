@@ -20,11 +20,9 @@
 
 ## How to Train the Model:
 
-1. To train this model, a user must input the URL link to a training dataset in S3
-
-   - Training dataset must be in csv format
-
-   - Training dataset must contain the following columns (syntax must be identical):
+- To train this model, a user must input the URL link to a training dataset in S3
+  - Training dataset must be in csv format
+  - Training dataset must contain the following columns (syntax must be identical):
 
 Start Date
 
