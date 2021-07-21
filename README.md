@@ -1,13 +1,13 @@
-## NLP Self Service Comment Classifier (Topic Modeling)
+# NLP Self Service Comment Classifier (Topic Modeling)
 
-Description: The ML model categorizes negative NPS comments based on customers' complaints
+## Description: The ML model categorizes negative NPS comments based on customers' complaints 
 
-- NLP self service comment classifier model: predicts comment classes with around 90% accuracy
-
-
+- NLP self service comment classifier model: predicts comment classes with around 90% accuracy <br />
 
 
-Significance: This model can be used by the business to better understand customer feedback and comprehend trends in user sentiments (ex. shipping complaints skyrocketed from Feb-Apr) 
+
+
+## Significance: This model can be used by the business to better understand customer feedback and comprehend trends in user sentiments (ex. shipping complaints skyrocketed from Feb-Apr) 
 
 - Automating the comment labeling process saves the business time, money, and effort. Now, no human has to read through thousands of comments anymore to comprehend what can be improved
 
