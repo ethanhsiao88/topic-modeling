@@ -23,10 +23,8 @@
 - To train this model, a user must input the URL link to a training dataset in S3
   - Training dataset must be in csv format
   - Training dataset must contain the following columns (syntax must be identical):
-
-Start Date
-
-End Date
+    - Start Date
+    - End Date
 
 How likely are you to recommend the Glam Bag to a friend?
 
