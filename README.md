@@ -22,13 +22,14 @@
 - To train this model, a user must input the URL link to a training dataset in S3
   - Training dataset must be in csv format
   - Training dataset must contain the following columns (syntax must be identical):
-    - Start Date
-    - End Date
+    - Start Date (NOTE: must be formatted in ‘yyyy-mm-dd hh:mm:ss’ format)
+    - End Date (NOTE: must be formatted in ‘yyyy-mm-dd hh:mm:ss’ format)
     - How likely are you to recommend the Glam Bag to a friend?
     - What is the most important reason for your recommendation answer?
     - topic_type
       - Recommended labels: personalization, shipping/packaging, repetitive, excitement/quality, value/price, other (syntax should be identical)
     - userId
+    - subscription (NOTE: user must add this column)
   - NOTE: Since this is a csv, it is parsed by commas. To avoid errors, replace all commas with spaces
 - The user can also adjust 3 other fields:
   - Desired test/train split (default = 0.2; can change to 0.1, 0.15, 0.25, or 0.3)
@@ -42,11 +43,12 @@
 - To use this model for inference, a user must input the URL link to a dataset in S3
   - Dataset must be in csv format
   - Dataset must contain the following columns (syntax must be identical):
-    - Start Date
-    - End Date
+    - Start Date (NOTE: must be formatted in ‘yyyy-mm-dd hh:mm:ss’ format)
+    - End Date (NOTE: must be formatted in ‘yyyy-mm-dd hh:mm:ss’ format)
     - How likely are you to recommend the Glam Bag to a friend?
     - What is the most important reason for your recommendation answer?
     - userId
+    - subscription (NOTE: user must add this column)
   - NOTE: Since this is a csv, it is parsed by commas. To avoid errors, replace all commas with spaces
 - The user should also input the path to the saved, pretrained model that will be used for inference
   - Default = dbfs:/mnt/ipsy-databricks-mlp/research/ethan/monolabeled-model-business-w-flair-and-other
@@ -55,8 +57,8 @@
 
 
 ## Code:
-- Notebook for training model: https://ipsy-prod.cloud.databricks.com/#notebook/4659645/command/4659655
-- Notebook for inference using pretrained model: https://ipsy-prod.cloud.databricks.com/#notebook/4676157/command/4676247 <br />
+- Notebook for training model: https://ipsy-prod.cloud.databricks.com/#notebook/4686143/command/4686144
+- Notebook for inference using pretrained model: https://ipsy-prod.cloud.databricks.com/#notebook/4676157/command/4676158 <br />
 
 
 ## Training Pipeline:
